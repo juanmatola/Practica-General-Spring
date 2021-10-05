@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Autores</title>
+</head>
+<body>
+
+    <h1>Lista de autores:</h1>
+    
+
+    <ul>
+        <li th:each="autor : ${autores}" th:text="${autor.nombre}"></li>
+    </ul>
+
+    
+</body>
+</html>
