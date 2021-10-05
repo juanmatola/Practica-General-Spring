@@ -45,4 +45,13 @@ public class AutorService {
 		return repoAutor.findAll();
 
 	}
+
+	public void removeById(String id) {
+		
+		repoAutor.deleteById(id);
+		
+	}
+	
+	
+	
 }
