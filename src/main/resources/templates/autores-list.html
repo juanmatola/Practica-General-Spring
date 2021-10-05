@@ -13,7 +13,13 @@
     
 
     <ul>
-        <li th:each="autor : ${autores}" th:text="${autor.nombre}"></li>
+        <li th:each="autor : ${autores}">
+         
+        	<span th:text="${autor.nombre}"></span>
+        	  
+        	<a th:href="@{/autores/remove/{id}(id=${autor.id})}">eliminar</a>
+        	 
+        </li>
     </ul>
     
     
