@@ -14,7 +14,7 @@ spring:
   thymeleaf:
     cache: false 
 server:
-  port: 80
+  port: 8081
   error:
     whitelabel:
       enabled: false
