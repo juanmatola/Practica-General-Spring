@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Autores</title>
     
-    <!--Bootstrap CSS-->
+	<!--Custom CSS-->
 	<link rel="stylesheet" href="/css/lists.css">
+    <!--Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 </head>
 <body>
@@ -18,6 +19,7 @@
 		<div class="row align-items-center page_header">
 			<div class="col-6">
 				<h1>Lista de autores:</h1>
+				<a href="/" class="h5">volver</a>
 			</div>
 			<div class="col-6 text-end">
 				<a href="/autores/create" class="btn btn-primary">Crear nuevo autor</a>
@@ -38,7 +40,7 @@
 			<tr th:each="autor : ${autores}">
 			
 			  <td th:text="${autor.nombre}"> </td>
-			  <td>Otto</td>
+			  <td> - </td>
 			  <td><a th:href="@{/autores/remove/{id}(id=${autor.id})}" class="btn btn-danger">eliminar</a></td>
 			  
 			</tr>
