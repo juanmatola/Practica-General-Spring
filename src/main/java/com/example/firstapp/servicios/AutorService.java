@@ -17,27 +17,9 @@ public class AutorService {
 	@Autowired
 	private AutorRepository repoAutor;
 	
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Autor save(String name) throws Exception {
-		
-		return repoAutor.save(this.createAutor(name));
-		
-	}
-	
+
 	public Autor createAutor(String name) {
 		return new Autor(name);
-	}
-	
-	public Autor findById(String id) throws Exception {
-		
-		Optional<Autor> res = repoAutor.findById(id);
-		
-		if(!res.isEmpty()) {
-			return res.get();
-		}else {
-			throw new Exception("No existe autor con dicho id");
-		}
-		
 	}
 	
 	public List<Autor> findAll(){
@@ -52,6 +34,35 @@ public class AutorService {
 		
 	}
 	
+	public Autor findById(String id) throws Exception {
+		
+		Optional<Autor> res = repoAutor.findById(id);
+		
+		if(!res.isEmpty()) {
+			return res.get();
+		}else {
+			throw new Exception("No existe autor con dicho id");
+		}
+		
+	}
 	
+	public Autor findByName(String name) throws Exception {
+		
+		Optional<Autor> res = repoAutor.findByName(name);
+		
+		if(!res.isEmpty()) {
+			return res.get();
+		}else {
+			throw new Exception("No existe autor con dicho nombre");
+		}
+		
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Autor save(String name) throws Exception {
+		
+		return repoAutor.save(this.createAutor(name));
+		
+	}
 	
 }
