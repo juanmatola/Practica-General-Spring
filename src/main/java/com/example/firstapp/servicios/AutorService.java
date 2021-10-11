@@ -12,57 +12,72 @@ import com.example.firstapp.repositories.AutorRepository;
 
 @Service
 public class AutorService {
-	
-	
+
 	@Autowired
 	private AutorRepository repoAutor;
-	
 
 	public Autor createAutor(String name) {
 		return new Autor(name);
 	}
-	
-	public List<Autor> findAll(){
-		
+
+	public List<Autor> findAll() {
+
 		return repoAutor.findAll();
 
 	}
 
 	public void removeById(String id) {
-		
+
 		repoAutor.deleteById(id);
-		
+
 	}
-	
+
 	public Autor findById(String id) throws Exception {
-		
+
 		Optional<Autor> res = repoAutor.findById(id);
-		
-		if(!res.isEmpty()) {
+
+		if (!res.isEmpty()) {
 			return res.get();
-		}else {
+		} else {
 			throw new Exception("No existe autor con dicho id");
 		}
-		
+
 	}
-	
+
 	public Autor findByName(String name) throws Exception {
-		
+
 		Optional<Autor> res = repoAutor.findByName(name);
-		
-		if(!res.isEmpty()) {
+
+		if (!res.isEmpty()) {
 			return res.get();
-		}else {
+		} else {
 			throw new Exception("No existe autor con dicho nombre");
 		}
-		
+
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Autor save(String name) throws Exception {
-		
+
 		return repoAutor.save(this.createAutor(name));
-		
+
 	}
-	
+
+	public void changeStatus(String id) {
+		try {
+			Autor a = this.findById(id);
+			a.setAlta(!a.getAlta());
+			repoAutor.save(a);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+
+	public void changeNamebyId(String id, String newName) throws Exception {
+		Autor miautor = this.findById(id);
+		miautor.setNombre(newName);
+		repoAutor.save(miautor);
+	}
+
 }

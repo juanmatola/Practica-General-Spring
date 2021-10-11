@@ -70,6 +70,32 @@ public class AutorController {
 		return "redirect:/autores";
 	}
 	
+	@GetMapping("/changestatus/{id}")
+	public String changeStatus(@PathVariable("id") String id) {
+		
+		autorService.changeStatus(id);
+		
+		return "redirect:/autores";
+	}
+	
+	@GetMapping("/changename/{id}")
+	public String changeName(ModelMap model, @PathVariable("id") String id) {
+		model.addAttribute("id",id);
+		
+		return "modifyAutor.html";
+		
+	}
+	
+	@PostMapping("/changename")
+	public String changing(@RequestParam("id") String id, @RequestParam("name") String name){
+		try {
+			autorService.changeNamebyId(id, name);
+		} catch (Exception e) {
+			System.err.println("ERROR AL MODIFICAR EL NOMBRE, DESCRIPCION: "+ e);
+		}
+		
+		return"redirect:/autores";
+	}
 	
 
 }
