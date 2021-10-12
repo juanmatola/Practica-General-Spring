@@ -28,16 +28,31 @@
 
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 border border-2 border-secondary rounded">
-                <form class="my-4" action="/autores/create" method="post">
+            
+            
+            
+                <form class="my-4" th:action="@{/autores/update/name/{id}(id=${autor.id})}"  method="post">
                     <div class="mb-3">
+                    
                       <label for="name" class="form-label">Nombre:</label>
                       <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="...">
-                      <div id="nameHelp" class="form-text">Nuevo nombre para el autor.</div>
+                      
+                      <div id="nameHelp" class="form-text">
+	                      Nuevo nombre para el autor: 
+	                      <span th:text="${autor.nombre}"></span>
+                      </div>
+                      
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </form>
+                
+                
+                
+                
+                
+                
             </div>
         </div>
 
