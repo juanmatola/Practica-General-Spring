@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.firstapp.entities.Autor;
+import com.example.firstapp.interfaces.ErrorHandler;
 import com.example.firstapp.servicios.AutorService;
 
 
 @Controller
 @RequestMapping("/autores")
-public class AutorController {
+public class AutorController implements ErrorHandler  {
 	
 	@Autowired
 	private AutorService autorService;
@@ -50,9 +51,8 @@ public class AutorController {
 			
 		} catch (Exception e) {
 		
-			model.addAttribute("err", e.getMessage());
+			return this.errorHandle(e, model);
 			
-			return this.index(model);
 		}
 
 	}
@@ -68,13 +68,47 @@ public class AutorController {
 			
 		} catch (Exception e) {
 			
-			model.addAttribute("err", e.getMessage());
+			return this.errorHandle(e, model);
 			
-			return this.index(model);
 		}
 		
 	}
-
+	
+	@GetMapping("/update/name/{id}")
+	public String updateName(ModelMap model, @PathVariable("id") String id) {
+		
+		try {
+			
+			Autor autor = autorService.findById(id);
+			model.addAttribute("autor", autor);
+			
+			return "update-autor";
+			
+		} catch (Exception e) {
+			
+			return this.errorHandle(e, model);
+			
+		}
+		
+	}
+	
+	@PostMapping("/update/name/{id}")
+	public String changeName(ModelMap model, @PathVariable("id") String id, @RequestParam("name") String name) {
+		
+		try {
+			
+			autorService.update(id, name);
+			
+			return "redirect:/autores";
+			
+		} catch (Exception e) {
+			
+			return this.errorHandle(e, model);
+			
+		}
+		
+	}
+	
 	@GetMapping("/remove/{id}")
 	public String remove(ModelMap model, @PathVariable("id") String id) {
 		
@@ -86,11 +120,18 @@ public class AutorController {
 			
 		} catch (Exception e) {
 			
-			model.addAttribute("err", e.getMessage());
+			return this.errorHandle(e, model);
 			
-			return this.index(model);
 		}
 		
+	}
+	
+	@Override
+	public String errorHandle(Exception e, ModelMap model) {
+		
+		model.addAttribute("err", e.getMessage());
+		
+		return this.index(model);
 	}
 	
 }
