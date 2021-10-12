@@ -38,6 +38,16 @@ public class AutorService {
 		
 	}
 	
+	public void update(String id, String name) throws Exception {
+		
+		Autor autor = this.findById(id);
+		
+		autor.setNombre(name);
+		
+		repoAutor.save(autor);
+		
+	}
+	
 	public void chageAltaById(String id) throws Exception {
 		Autor autor = this.findById(id);
 		
