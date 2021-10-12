@@ -4,3 +4,13 @@
 .page_header h1{
 	margin: 0;
 }
+.err_container{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.err_container .close{
+	text-decoration: none;
+	color: white;
+	font-weight: bold ;
+}
