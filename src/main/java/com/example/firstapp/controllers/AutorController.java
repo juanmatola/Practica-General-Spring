@@ -22,7 +22,6 @@ public class AutorController {
 	@Autowired
 	private AutorService autorService;
 	
-
 	@GetMapping()
 	public String index(ModelMap modeloDeAutores) {
 		
@@ -43,33 +42,55 @@ public class AutorController {
 	@PostMapping("/create")
 	public String runCreate(ModelMap model, @RequestParam("name") String name) {
 		
-		String res = "redirect:/autores?insertResult=";
-		
 		try {
 			
 			autorService.save(name);
 			
-			res = res.concat("true");
+			return "redirect:/autores";
+			
+		} catch (Exception e) {
+		
+			model.addAttribute("err", e.getMessage());
+			
+			return this.index(model);
+		}
+
+	}
+	
+	@GetMapping("/update/alta/{id}")
+	public String updateAlta(ModelMap model, @PathVariable("id") String id) {
+		
+		try {			
+			
+			autorService.chageAltaById(id);
+			
+			return "redirect:/autores";
 			
 		} catch (Exception e) {
 			
-			System.err.print("Error al insertar nuevo autor " + e.toString());
-		
-			res = res.concat("false");
+			model.addAttribute("err", e.getMessage());
 			
+			return this.index(model);
 		}
-
-		return res;
+		
 	}
 
 	@GetMapping("/remove/{id}")
-	public String remove(@PathVariable("id") String id) {
+	public String remove(ModelMap model, @PathVariable("id") String id) {
 		
-		autorService.removeById(id);
+		try {
+			
+			autorService.removeById(id);
+			
+			return "redirect:/autores";
+			
+		} catch (Exception e) {
+			
+			model.addAttribute("err", e.getMessage());
+			
+			return this.index(model);
+		}
 		
-		return "redirect:/autores";
 	}
 	
-	
-
 }
