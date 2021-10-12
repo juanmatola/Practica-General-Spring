@@ -28,10 +28,22 @@ public class AutorService {
 
 	}
 
-	public void removeById(String id) {
+	public void removeById(String id) throws Exception {
 		
-		repoAutor.deleteById(id);
+		try {
+			repoAutor.deleteById(id);			
+		} catch (Exception e) {
+			throw new Exception("Error al eliminar el autor, verifique que no tiene Libros registrados en la aplicación");
+		}
 		
+	}
+	
+	public void chageAltaById(String id) throws Exception {
+		Autor autor = this.findById(id);
+		
+		autor.setAlta(!autor.getAlta());
+		
+		repoAutor.save(autor);
 	}
 	
 	public Autor findById(String id) throws Exception {
