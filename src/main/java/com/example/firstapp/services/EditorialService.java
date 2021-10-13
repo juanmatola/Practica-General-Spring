@@ -30,37 +30,71 @@ public class EditorialService {
 
 	}
 
-	public void chageAltaById(String id) throws Exception{
-		
+	public void chageAltaById(String id) throws Exception {
+
 		Editorial editorial = this.findById(id);
-		
+
 		editorial.setAlta(!editorial.getAlta());
-		
+
 		try {
-			
+
 			editorialRepository.save(editorial);
-			
+
 		} catch (Exception e) {
-			
+
 			System.err.println(e);
-			
+
 			throw new Exception("Hubo algun error para guardar el cambio realizado");
-			
+
 		}
-		
-		
+
 	}
-	
-	public Editorial findById(String id) throws Exception{
-		
+
+	public void update(String id, String name) throws Exception {
+
+		Editorial editorial = this.findById(id);
+
+		editorial.setNombre(name);
+
+		try {
+
+			editorialRepository.save(editorial);
+
+		} catch (Exception e) {
+
+			System.err.println(e);
+
+			throw new Exception("Hubo algun error para guardar el cambio realizado");
+
+		}
+
+	}
+
+	public void removeById(String id) throws Exception {
+
+		try {
+
+			editorialRepository.deleteById(id);
+
+		} catch (Exception e) {
+
+			throw new Exception(
+					"Error al eliminar la editorial, verifique que no tiene Libros registrados en la aplicación");
+
+		}
+
+	}
+
+	public Editorial findById(String id) throws Exception {
+
 		Optional<Editorial> res = editorialRepository.findById(id);
-		
-		if(!res.isEmpty()) {
+
+		if (!res.isEmpty()) {
 			return res.get();
-		}else {
+		} else {
 			throw new Exception("No existe editorial con dicho id");
 		}
-		
+
 	}
 
 }

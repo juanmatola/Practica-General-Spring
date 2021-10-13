@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Autor</title>
+    <title>Editar Editorial</title>
     
     <!--Custom CSS-->
     <link rel="stylesheet" href="/css/page.css">
@@ -18,8 +18,8 @@
         
        	<div class="row align-items-center page_header">
 			<div class="col-6">
-		        <h1>Editar autor</h1>
-		        <a href="/autores" class="h5">volver</a>
+		        <h1>Editar editorial</h1>
+		        <a href="/editoriales" class="h5">volver</a>
 			</div>
 			<div class="col-6 text-end">
 				
@@ -31,7 +31,7 @@
             
             
             
-                <form class="my-4" th:action="@{/autores/update/name/{id}(id=${autor.id})}"  method="post">
+                <form class="my-4" th:action="@{/editoriales/update/name/{id}(id=${editorial.id})}"  method="post">
                     <div class="mb-3">
                     
                       <label for="name" class="form-label">Nombre:</label>
@@ -39,7 +39,7 @@
                       
                       <div id="nameHelp" class="form-text">
 	                      Nuevo nombre para el autor: 
-	                      <span th:text="${autor.nombre}"></span>
+	                      <span th:text="${editorial.nombre}"></span>
                       </div>
                       
                     </div>

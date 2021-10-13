@@ -74,6 +74,58 @@ public class EditorialController implements ErrorHandler {
 		}
 
 	}
+	
+	@GetMapping("/update/name/{id}")
+	public String updateName(ModelMap model, @PathVariable("id") String id) {
+
+		try {
+
+			Editorial editorial = editorialService.findById(id);
+			model.addAttribute("editorial", editorial);
+
+			return this.viewPath.concat("update-editorial");
+
+		} catch (Exception e) {
+
+			return this.errorHandle(e, model);
+
+		}
+
+	}
+
+	@PostMapping("/update/name/{id}")
+	public String changeName(ModelMap model, @PathVariable("id") String id, @RequestParam("name") String name) {
+
+		try {
+
+			editorialService.update(id, name);
+
+			return "redirect:/editoriales";
+
+		} catch (Exception e) {
+
+			return this.errorHandle(e, model);
+
+		}
+
+	}
+	
+	@GetMapping("/remove/{id}")
+	public String remove(ModelMap model, @PathVariable("id") String id) {
+
+		try {
+
+			editorialService.removeById(id);
+
+			return "redirect:/editoriales";
+
+		} catch (Exception e) {
+
+			return this.errorHandle(e, model);
+
+		}
+
+	}
 
 	@Override
 	public String errorHandle(Exception e, ModelMap model) {
