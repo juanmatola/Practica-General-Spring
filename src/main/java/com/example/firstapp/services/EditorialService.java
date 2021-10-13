@@ -1,6 +1,7 @@
 package com.example.firstapp.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,39 @@ public class EditorialService {
 
 		editorialRepository.save(this.createEditorial(name));
 
+	}
+
+	public void chageAltaById(String id) throws Exception{
+		
+		Editorial editorial = this.findById(id);
+		
+		editorial.setAlta(!editorial.getAlta());
+		
+		try {
+			
+			editorialRepository.save(editorial);
+			
+		} catch (Exception e) {
+			
+			System.err.println(e);
+			
+			throw new Exception("Hubo algun error para guardar el cambio realizado");
+			
+		}
+		
+		
+	}
+	
+	public Editorial findById(String id) throws Exception{
+		
+		Optional<Editorial> res = editorialRepository.findById(id);
+		
+		if(!res.isEmpty()) {
+			return res.get();
+		}else {
+			throw new Exception("No existe editorial con dicho id");
+		}
+		
 	}
 
 }

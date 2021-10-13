@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +47,23 @@ public class EditorialController implements ErrorHandler {
 		try {
 
 			editorialService.save(name);
+
+			return "redirect:/editoriales";
+
+		} catch (Exception e) {
+
+			return this.errorHandle(e, model);
+
+		}
+
+	}
+	
+	@GetMapping("/update/alta/{id}")
+	public String updateAlta(ModelMap model, @PathVariable("id") String id) {
+
+		try {
+
+			editorialService.chageAltaById(id);
 
 			return "redirect:/editoriales";
 
