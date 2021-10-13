@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.firstapp.entities.Autor;
 import com.example.firstapp.interfaces.ErrorHandler;
-import com.example.firstapp.servicios.AutorService;
+import com.example.firstapp.services.AutorService;
 
 
 @Controller
