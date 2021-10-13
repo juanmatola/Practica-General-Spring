@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Listado de Editoriales</title>
+	<title>Listado de libroes</title>
 
 	<!--Custom CSS-->
 	<link rel="stylesheet" href="/css/page.css">
@@ -18,6 +18,22 @@
 </head>
 
 <body>
+
+	<!-- <div class="container">
+
+		<div th:each="libro : ${libros}" style="border-bottom: 1px solid black;">
+			<p  th:text="${libro.isbn}"></p>
+			<p  th:text="${libro.titulo}"></p>
+			<p  th:text="${libro.anio}"></p>
+			<p  th:text="${libro.ejemplares}"></p>
+			<p  th:text="${libro.ejemplaresPrestados}"></p>
+			<p  th:text="${libro.ejemplaresRestantes}"></p>
+			<p  th:text="${libro.alta}"></p>
+			<p  th:text="${libro.autor}"></p>
+			<p  th:text="${libro.libro}"></p>
+		</div>
+
+	</div> -->
 
 	<main class="container">
 
@@ -45,22 +61,40 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">Nombre</th>
-					<th scope="col">Alta/Baja</th>
-					<th scope="col">Eliminar</th>
+					<th scope="col">Isbn</th>
+					<th scope="col">Titulo</th>
+					<th scope="col">Año</th>
+					<th scope="col">Ejemplares</th>
+					<th scope="col">Ejemplares Prestados</th>
+					<th scope="col">Ejemplares Restantes</th>
+					<th scope="col">Alta</th>
+					<th scope="col">Autor</th>
+					<th scope="col">Editorial</th>
+					<th scope="col">Elimiar</th>
 				</tr>
 			</thead>
 			<tbody>
 
 				<tr th:each="libro : ${libros}">
 
+					<td th:text="${libro.isbn}"></td>
+
 					<td>
-						<span th:text="${libro.nombre}"></span>
-						<span> - </span>
+						<span th:text="${libro.titulo}"></span>
+						<!-- <span> - </span>
 						<a th:href="@{/libros/update/name/{id}(id=${libro.id})}" class="small">
 							<small>cambiar</small>
-						</a>
+						</a> -->
 					</td>
+
+					<td th:text="${libro.anio}"></td>
+
+					<td th:text="${libro.ejemplares}"></td>
+
+					<td th:text="${libro.ejemplaresPrestados}"></td>
+
+					<td th:text="${libro.ejemplaresRestantes}"></td>
+					
 					<td>
 						<span th:text="${libro.alta} ? 'Alta' : 'Baja'"
 							  th:class="${libro.alta} ? 'text-success' : 'text-danger'"></span>
@@ -73,6 +107,11 @@
 							</svg>
 						</a>
 					</td>
+
+					<td th:text="${libro.autor.nombre}"></td>
+
+					<td th:text="${libro.editorial.nombre}"></td>
+
 					<td>
 						<a th:href="@{/libros/remove/{id}(id=${libro.id})}" class="btn btn-danger">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -85,6 +124,7 @@
 						</a>
 					</td>
 
+
 				</tr>
 
 
@@ -92,6 +132,7 @@
 		</table>
 
 	</main>
+
 
 
 	<!--Bootstrap JS-->

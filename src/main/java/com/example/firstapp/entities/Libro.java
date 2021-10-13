@@ -18,8 +18,8 @@ public class Libro {
 	private String titulo;
 	private Integer anio;
 	private Integer ejemplares;
-    private Integer ejemplaresPrestados;
-	private Integer ejemplaresRestantes;
+    private Integer ejemplaresprestados;
+	private Integer ejemplaresrestantes;
 	private Boolean alta;
 	@ManyToOne
 	private Autor autor;
@@ -30,16 +30,16 @@ public class Libro {
 		
 	}
 	
-	public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados,
-			Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+	public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresprestados,
+			Integer ejemplaresrestantes, Boolean alta, Autor autor, Editorial editorial) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.anio = anio;
 		this.ejemplares = ejemplares;
-		this.ejemplaresPrestados = ejemplaresPrestados;
-		this.ejemplaresRestantes = ejemplaresRestantes;
+		this.ejemplaresprestados = ejemplaresprestados;
+		this.ejemplaresrestantes = ejemplaresrestantes;
 		this.alta = alta;
 		this.autor = autor;
 		this.editorial = editorial;
@@ -86,19 +86,19 @@ public class Libro {
 	}
 
 	public Integer getEjemplaresPrestados() {
-		return ejemplaresPrestados;
+		return ejemplaresprestados;
 	}
 
-	public void setEjemplaresPrestados(Integer ejemplaresPrestados) {
-		this.ejemplaresPrestados = ejemplaresPrestados;
+	public void setEjemplaresPrestados(Integer ejemplaresprestados) {
+		this.ejemplaresprestados = ejemplaresprestados;
 	}
 
 	public Integer getEjemplaresRestantes() {
-		return ejemplaresRestantes;
+		return ejemplaresrestantes;
 	}
 
-	public void setEjemplaresRestantes(Integer ejemplaresRestantes) {
-		this.ejemplaresRestantes = ejemplaresRestantes;
+	public void setEjemplaresRestantes(Integer ejemplaresrestantes) {
+		this.ejemplaresrestantes = ejemplaresrestantes;
 	}
 
 	public Boolean getAlta() {
