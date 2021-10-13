@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crea nuevo Autor</title>
+    <title>Crea nueva Editorial</title>
     
     <!--Custom CSS-->
     <link rel="stylesheet" href="/css/page.css">
@@ -18,8 +18,8 @@
         
        	<div class="row align-items-center page_header">
 			<div class="col-6">
-		        <h1>Creación de nuevo autor</h1>
-		        <a href="/autores" class="h5">volver</a>
+		        <h1>Creación de nueva editorial</h1>
+		        <a href="/editoriales" class="h5">volver</a>
 			</div>
 			<div class="col-6 text-end">
 				
@@ -28,11 +28,11 @@
 
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 border border-2 border-secondary rounded">
-                <form class="my-4" action="/autores/create" method="post">
+                <form class="my-4" action="/editoriales/create" method="post">
                     <div class="mb-3">
                       <label for="name" class="form-label">Nombre:</label>
                       <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="...">
-                      <div id="nameHelp" class="form-text">Nombre utilizado para crear un nuevo autor.</div>
+                      <div id="nameHelp" class="form-text">Nombre utilizado para crear una nueva editorial.</div>
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">Crear</button>

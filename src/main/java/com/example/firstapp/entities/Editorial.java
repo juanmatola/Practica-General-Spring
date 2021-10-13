@@ -20,8 +20,12 @@ public class Editorial {
 		
 	}
 	
+	public Editorial(String nombre) {
+		this.nombre = nombre;
+		this.alta = true;
+	}
+	
 	public Editorial(String id, String nombre, Boolean alta) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.alta = alta;

@@ -12,11 +12,21 @@ import com.example.firstapp.repositories.EditorialRepository;
 public class EditorialService {
 	@Autowired
 	private EditorialRepository editorialRepository;
-	
-	public List<Editorial> findAll(){
-		
-		return editorialRepository.findAll();
-		
+
+	public Editorial createEditorial(String name) {
+		return new Editorial(name);
 	}
-	
+
+	public List<Editorial> findAll() {
+
+		return editorialRepository.findAll();
+
+	}
+
+	public void save(String name) throws Exception {
+
+		editorialRepository.save(this.createEditorial(name));
+
+	}
+
 }
