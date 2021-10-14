@@ -50,7 +50,7 @@ public class LibroController implements ErrorHandler {
 
 	@GetMapping("/create")
 	public String createForm(ModelMap model) {
-
+		
 		model.addAttribute("autores", autorService.findAll());
 		model.addAttribute("editoriales", editorialService.findAll());
 
@@ -76,11 +76,37 @@ public class LibroController implements ErrorHandler {
 
 	@GetMapping("/update/{id}")
 	public String updateForm(ModelMap model, @PathVariable("id") String id) {
+		
+		try {
+			
+			model.addAttribute("libro", libroSerivice.findById(id));
+			
+		} catch (Exception e) {
+			return this.errorHandle(e, model);
+		}
 
 		model.addAttribute("autores", autorService.findAll());
 		model.addAttribute("editoriales", editorialService.findAll());
 
 		return this.viewPath.concat("update-libro");
+	}
+	
+	
+	@PostMapping("/update/{id}")
+	public String updateLibro(ModelMap model, @PathVariable("id") String id,
+			@RequestParam("titulo") String titulo, @RequestParam("isbn") String isbn,
+			@RequestParam("ejemplares") String ejemplares, @RequestParam("anio") String anio,
+			@RequestParam("autor") String autorID, @RequestParam("editorial") String editorialID) {
+		
+		try {
+			
+			libroSerivice.update(id, titulo, isbn, ejemplares, anio, autorID, editorialID);
+			
+		} catch (Exception e) {
+			this.errorHandle(e, model);
+		}
+		
+		return "redirect:/libros";
 	}
 
 	@GetMapping("/update/alta/{id}")
@@ -98,6 +124,18 @@ public class LibroController implements ErrorHandler {
 
 		}
 
+	}
+	
+	@GetMapping("/remove/{id}")
+	public String remove(ModelMap model, @PathVariable("id") String id) {
+		
+		try {			
+			libroSerivice.removeById(id);
+		} catch (Exception e) {
+			return this.errorHandle(e, model);
+		}
+		
+		return "redirect:/libros";
 	}
 
 	@Override

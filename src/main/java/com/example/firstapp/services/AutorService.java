@@ -33,7 +33,7 @@ public class AutorService {
 		try {
 			repoAutor.deleteById(id);			
 		} catch (Exception e) {
-			throw new Exception("Error al eliminar el autor, verifique que no tiene Libros registrados en la aplicación");
+			throw new Exception("Error al eliminar el autor, verifique que no tiene Libros registrados en la aplicación o que el autor existe");
 		}
 		
 	}

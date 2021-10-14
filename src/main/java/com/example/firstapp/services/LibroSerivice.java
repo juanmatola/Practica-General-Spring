@@ -21,25 +21,25 @@ public class LibroSerivice {
 	@Autowired
 	private EditorialService editorialService;
 
-	public void save(String isbn, String titulo, String ejemplares,
-			String anio, String autorID, String editorialID)  throws Exception{
-		
+	public void save(String isbn, String titulo, String ejemplares, String anio, String autorID, String editorialID)
+			throws Exception {
+
 		Long isbnLong = Long.parseLong(isbn);
 		Integer ejemplaresInt = Integer.parseInt(ejemplares);
 		Integer anioInt = Integer.parseInt(anio);
-		
+
 		try {
-			
+
 			Autor autor = autorService.findById(autorID);
 			Editorial editorial = editorialService.findById(editorialID);
 			Libro libro = new Libro(isbnLong, titulo, anioInt, ejemplaresInt, autor, editorial);
-			
+
 			libroRepository.save(libro);
-			
+
 		} catch (Exception e) {
 			throw new Exception("Error en la creación del libro");
 		}
-		
+
 	}
 
 	public List<Libro> findAll() throws Exception {
@@ -68,7 +68,35 @@ public class LibroSerivice {
 
 	}
 
-	private Libro findById(String id) throws Exception {
+	public void update(String id, String titulo, String isbn, String ejemplares, String anio, String autorID,
+			String editorialID) throws Exception {
+		
+		Long isbnLong = Long.parseLong(isbn);
+		Integer ejemplaresInt = Integer.parseInt(ejemplares);
+		Integer anioInt = Integer.parseInt(anio);
+		
+		try {			
+			
+			Autor autor = autorService.findById(autorID);
+			Editorial editorial = editorialService.findById(editorialID);
+			Libro libro = this.findById(id);
+			
+			libro.setTitulo(titulo);
+			libro.setIsbn(isbnLong);
+			libro.setEjemplares(ejemplaresInt);
+			libro.setAnio(anioInt);
+			libro.setAutor(autor);
+			libro.setEditorial(editorial);
+			
+			libroRepository.save(libro);
+			
+		} catch (Exception e) {
+			throw new Exception("Hubo un problema con la actualización del libro");
+		}
+
+	}
+
+	public Libro findById(String id) throws Exception {
 
 		Optional<Libro> res = libroRepository.findById(id);
 
@@ -76,6 +104,16 @@ public class LibroSerivice {
 			return res.get();
 		} else {
 			throw new Exception("No existe libro con dicho id");
+		}
+
+	}
+
+	public void removeById(String id) throws Exception {
+
+		try {
+			libroRepository.deleteById(id);
+		} catch (Exception e) {
+			throw new Exception("Error al eliminar el libro, asegurese del que el libro exista");
 		}
 
 	}

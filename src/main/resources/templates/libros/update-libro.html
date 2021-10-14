@@ -27,43 +27,53 @@
 		</div>
 
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6 border border-2 border-secondary rounded">
-            
-            
-            
-                <form class="my-4" action=""  method="post">
-                    <div class="mb-3">
-                    
-                      <label for="name" class="form-label">Nombre:</label>
-                      <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" placeholder="...">
-                      
+            <div class="col-12 border border-2 border-secondary rounded">
+
+                <form class="my-4 row" th:action="@{/libros/update/{id}(id=${libro.id})}" method="post">
+
+                    <div class="mb-3 col-12 col-md-6">
+                      <label for="titulo" class="form-label">Titulo:</label>
+                      <input th:value="${libro.titulo}" type="text" class="form-control" id="titulo" name="titulo" aria-describedby="nameHelp" placeholder="...">
                       <div id="nameHelp" class="form-text">
                         <span class="small muted">Nombre para el nuevo libro</span>
                       </div>
-                      
                     </div>
-                    <div class="mb-3">
+
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="ejemplares" class="form-label">Cantidad de ejemplares:</label>
+                        <input th:value="${libro.ejemplares}" type="text" class="form-control" id="ejemplares" name="ejemplares" aria-describedby="nameHelp" placeholder="...">
+                    </div>
+
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="isbn" class="form-label">ISBN:</label>
+                        <input th:value="${libro.isbn}" type="text" class="form-control" id="isbn" name="isbn" aria-describedby="nameHelp" placeholder="...">
+                    </div>
+
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="anio" class="form-label">Año:</label>
+                        <input th:value="${libro.anio}" type="text" class="form-control" id="anio" name="anio" aria-describedby="nameHelp" placeholder="...">
+                    </div>
+
+                    <div class="mb-3 col-12 col-md-6">
                         <label for="name" class="form-label">Seleccionar autor:</label>
                         <select class="form-select" name="autor" aria-label="Default select example">
                             <option th:each="autor : ${autores}" th:text="${autor.nombre}" th:value="${autor.id}">   </option>
                         </select>
                     </div>
-                    <div class="mb-3">
+
+                    <div class="mb-3 col-12 col-md-6">
                         <label for="name" class="form-label">Seleccionar editorial:</label>
                         <select class="form-select"name="editorial" aria-label="Default select example">
                             <option th:each="editorial : ${editoriales}" th:text="${editorial.nombre}" th:value="${editorial.id}">   </option>
                         </select>                            
                     </div>
+                    
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </form>
-                
-                
-                
-                
-                
-                
+
+
             </div>
         </div>
 
