@@ -1,6 +1,7 @@
 package com.example.firstapp.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,29 @@ public class LibroSerivice {
 			
 		}
 		
+		
+	}
+
+	public void changeAltaById(String id) throws Exception{
+		
+		
+		Libro libro = this.findById(id);
+		
+		libro.setAlta(!libro.getAlta());
+		
+		libroRepository.save(libro);
+		
+	}
+
+	private Libro findById(String id) throws Exception{
+		
+		Optional<Libro> res = libroRepository.findById(id);
+		
+		if (!res.isEmpty()) {
+			return res.get();
+		}else {
+			throw new Exception("No existe libro con dicho id");
+		}
 		
 	}
 	

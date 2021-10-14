@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.firstapp.entities.Libro;
@@ -37,6 +38,23 @@ public class LibroController implements ErrorHandler{
 		}
 		
 		return this.viewPath.concat("libros-list");
+	}
+	
+	@GetMapping("/update/alta/{id}")
+	public String changeAlta(ModelMap model, @PathVariable("id") String id) {
+		
+		try {
+			
+			libroSerivice.changeAltaById(id);
+			
+			return "redirect:/libros";
+			
+		} catch (Exception e) {
+
+			return this.errorHandle(e, model);
+			
+		}
+
 	}
 
 	@Override
