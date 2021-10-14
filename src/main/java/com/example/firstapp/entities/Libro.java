@@ -9,38 +9,36 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Libro {
-	
+
 	@Id
 	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid" , strategy = "uuid2")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 	private Long isbn;
 	private String titulo;
 	private Integer anio;
 	private Integer ejemplares;
-    private Integer ejemplaresprestados;
+	private Integer ejemplaresprestados;
 	private Integer ejemplaresrestantes;
 	private Boolean alta;
 	@ManyToOne
 	private Autor autor;
 	@ManyToOne
 	private Editorial editorial;
-	
+
 	public Libro() {
-		
+
 	}
-	
-	public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresprestados,
-			Integer ejemplaresrestantes, Boolean alta, Autor autor, Editorial editorial) {
-		super();
-		this.id = id;
+
+	public Libro(Long isbn, String titulo, Integer anio, 
+				Integer ejemplares, Autor autor, Editorial editorial) {
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.anio = anio;
 		this.ejemplares = ejemplares;
-		this.ejemplaresprestados = ejemplaresprestados;
-		this.ejemplaresrestantes = ejemplaresrestantes;
-		this.alta = alta;
+		this.ejemplaresprestados = 0;
+		this.ejemplaresrestantes = ejemplares;
+		this.alta = true;
 		this.autor = autor;
 		this.editorial = editorial;
 	}
