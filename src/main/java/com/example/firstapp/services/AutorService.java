@@ -16,7 +16,8 @@ public class AutorService {
 	
 	@Autowired
 	private AutorRepository repoAutor;
-	
+	@Autowired
+	private LibroSerivice libroService;	
 
 	public Autor createAutor(String name) {
 		return new Autor(name);
@@ -54,8 +55,13 @@ public class AutorService {
 		autor.setAlta(!autor.getAlta());
 		
 		repoAutor.save(autor);
+		
+		if (!autor.getAlta()) {			
+			libroService.setAltaByAutor(autor);
+		}
+		
 	}
-	
+
 	public Autor findById(String id) throws Exception {
 		
 		Optional<Autor> res = repoAutor.findById(id);

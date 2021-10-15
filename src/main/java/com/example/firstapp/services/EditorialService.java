@@ -13,6 +13,8 @@ import com.example.firstapp.repositories.EditorialRepository;
 public class EditorialService {
 	@Autowired
 	private EditorialRepository editorialRepository;
+	@Autowired
+	private LibroSerivice libroSerivice;
 
 	public Editorial createEditorial(String name) {
 		return new Editorial(name);
@@ -39,6 +41,10 @@ public class EditorialService {
 		try {
 
 			editorialRepository.save(editorial);
+			
+			if (!editorial.getAlta()) {
+				libroSerivice.setAltaByEditorial(editorial);
+			}
 
 		} catch (Exception e) {
 

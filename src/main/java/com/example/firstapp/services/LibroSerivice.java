@@ -58,6 +58,11 @@ public class LibroSerivice {
 
 	}
 
+	public List<Libro> findAvaliables(){
+		
+		return libroRepository.findByAlta(true);
+	}
+	
 	public void changeAltaById(String id) throws Exception {
 
 		Libro libro = this.findById(id);
@@ -116,6 +121,37 @@ public class LibroSerivice {
 			throw new Exception("Error al eliminar el libro, asegurese del que el libro exista");
 		}
 
+	}
+
+	public void setAltaByAutor(Autor autor) {
+		
+		List<Libro> libros = this.findByAutor(autor);
+		
+		for (Libro libro : libros) {
+			libro.setAlta(autor.getAlta());
+		}
+		
+		libroRepository.saveAll(libros);
+		
+	}
+	
+	public void setAltaByEditorial(Editorial editorial) {
+		
+		List<Libro> libros = this.findByEditorial(editorial);
+		
+		for (Libro libro : libros) {
+			libro.setAlta(editorial.getAlta());
+		}
+		
+		libroRepository.saveAll(libros);
+	}
+	
+	private List<Libro> findByEditorial(Editorial editorial) {
+		return libroRepository.findByEditorial(editorial);
+	}
+
+	public List<Libro> findByAutor(Autor autor){
+		return libroRepository.findByAutor(autor);
 	}
 
 }
